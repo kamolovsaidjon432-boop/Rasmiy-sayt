@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oqqo'rg'on tuman 2-son texnikumi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #0fbff9;
+            --accent: hsl(243, 96%, 48%);
+            --vibrant-blue: #00b4d8;
+            --vibrant-gold: #032dff;
+            --light: #f4f7ff;
+            --white: #ffffff;
+            --text: #1e293b;
+            --gray: #64748b;
+            --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 50%, #e0f2fe 100%);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Bar & Language Switcher */
+        .top-bar {
+            background: linear-gradient(90deg, var(--secondary), #1e1b4b, var(--secondary));
+            color: var(--white);
+            padding: 12px 4%;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .top-spacer { display: block; }
+
+        .top-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+
+        .top-info span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-info i {
+            color: var(--vibrant-gold);
+            font-size: 1.1rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--white);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent), #05fb3a);
+            border-color: var(--accent);
+            box-shadow: 0 3px 12px rgba(255, 46, 99, 0.45);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 25px rgba(26, 35, 126, 0.09);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--vibrant-blue);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 22px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            text-decoration: none;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .logo-icon {
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--vibrant-gold));
+            color: var(--white);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            box-shadow: 0 8px 20px rgba(255, 46, 99, 0.28);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.65rem;
+            line-height: 1.25;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), #3f51b5, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text span {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--gray);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            list-style: none;
+            flex-wrap: wrap;
+            width: 100%;
+            padding-top: 6px;
+        }
+
+        .nav-tab {
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.94rem;
+            color: var(--text);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+        }
+
+        .nav-tab:hover {
+            background: linear-gradient(135deg, #e0e7ff, #fae8ff);
+            color: var(--primary);
+            border-color: var(--vibrant-blue);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--primary), #3949ab);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 6px 16px rgba(26, 35, 126, 0.32);
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 7px 7px 0;
+            border-style: solid;
+            border-color: var(--primary) transparent transparent transparent;
+        }
+
+        /* Main Content Area (To'liq markazlashgan, ortiqcha yon panel yo'q) */
+        main {
+            flex: 1;
+            max-width: 1220px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 14px 36px rgba(26, 35, 126, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            animation: slideFadeIn 0.45s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--primary), var(--accent), var(--vibrant-blue)) 1;
+            padding-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .edit-hint {
+            background: #fff8e7;
+            color: #9a5b00;
+            border: 1px dashed var(--vibrant-gold);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Hero Banner */
+        .hero-box {
+            background: linear-gradient(120deg, var(--secondary) 0%, var(--primary) 48%, #5e35b1 100%);
+            color: var(--white);
+            padding: 50px 40px;
+            border-radius: 18px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(26, 35, 126, 0.25);
+        }
+
+        .hero-box h1 {
+            font-size: 2.25rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-box p {
+            font-size: 1.08rem;
+            opacity: 0.94;
+            max-width: 720px;
+            line-height: 1.65;
+            margin-bottom: 26px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #ff6b8b);
+            color: var(--white);
+            border: none;
+            padding: 13px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(255, 46, 99, 0.5);
+        }
+
+        /* Grids & Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, #ffffff 0%, var(--light) 100%);
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 24px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--vibrant-blue));
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 30px rgba(26, 35, 126, 0.12);
+        }
+
+        .card-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.12), rgba(0, 180, 216, 0.18));
+            color: var(--primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: #475569;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        /* Rahbariyat Cards */
+        .leader-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 18px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .leader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px rgba(0, 180, 216, 0.18);
+            border-color: var(--accent);
+        }
+
+        .leader-avatar {
+            width: 78px;
+            height: 78px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--vibrant-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.9rem;
+        }
+
+        .leader-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #ff758f);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .leader-name {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .leader-meta {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .placeholder-mark {
+            background: #fef08a;
+            color: #854d0e;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Aloqa ichidagi Joylashuv Xarita bloki */
+        .contact-map-wrapper {
+            margin-top: 28px;
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .contact-map-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .contact-map-top h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--primary), var(--vibrant-blue));
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .map-link-btn:hover {
+            background: linear-gradient(135deg, var(--accent), #ff6b8b);
+        }
+
+        .map-box-large {
+            height: 320px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid #cbd5e1;
+        }
+
+        .map-box-large iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Next Button */
+        .next-section-bar {
+            margin-top: 38px;
+            padding-top: 20px;
+            border-top: 1px dashed #cbd5e1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary), var(--vibrant-blue));
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(135deg, var(--accent), #ff758f);
+            transform: translateX(5px);
+        }
+
+        .styled-list {
+            list-style: none;
+        }
+
+        .styled-list li {
+            padding: 13px 16px;
+            background: var(--light);
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* =========================================================
+           PASTKI O'NG TARAF: ADMIN TELEGRAM + CHATGPT AVTO-BOT
+           (Bir-biriga tegmaydigan, yonma-yon / ustma-ust tartibda)
+           ========================================================= */
+        .right-float-stack {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            z-index: 998;
+        }
+
+        .bot-float-btn {
+            background: linear-gradient(135deg, #10a37f, #059669);
+            color: var(--white);
+            border: none;
+            padding: 13px 18px;
+            border-radius: 50px;
+            box-shadow: 0 8px 22px rgba(16, 163, 127, 0.45);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .bot-float-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .bot-pulse {
+            width: 10px;
+            height: 10px;
+            background: #fef08a;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(254, 240, 138, 0.35);
+        }
+
+        .admin-float {
+            background: linear-gradient(135deg, #0088cc, #00b4d8);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 8px 22px rgba(0, 136, 204, 0.42);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: var(--transition);
+        }
+
+        .admin-float:hover {
+            transform: scale(1.05);
+        }
+
+        .bot-window {
+            position: fixed;
+            bottom: 152px;
+            right: 24px;
+            width: 350px;
+            max-width: calc(100vw - 48px);
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 18px 42px rgba(13, 19, 61, 0.25);
+            border: 1px solid #cbd5e1;
+            overflow: hidden;
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .bot-window.open {
+            display: flex;
+            animation: slideFadeIn 0.25s ease;
+        }
+
+        .bot-header {
+            background: linear-gradient(135deg, var(--primary), #10a37f);
+            color: var(--white);
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bot-header-info h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+        }
+
+        .bot-header-info span {
+            font-size: 0.75rem;
+            opacity: 0.92;
+        }
+
+        .bot-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .bot-messages {
+            padding: 14px;
+            height: 250px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .msg {
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            max-width: 88%;
+            white-space: pre-line;
+        }
+
+        .msg.bot {
+            background: #e0f2fe;
+            color: #0f172a;
+            align-self: flex-start;
+            border-bottom-left-radius: 3px;
+        }
+
+        .msg.user {
+            background: var(--primary);
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 3px;
+        }
+
+        .bot-quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .quick-q {
+            background: var(--white);
+            border: 1px solid #cbd5e1;
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .quick-q:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .bot-input-area {
+            display: flex;
+            padding: 10px;
+            gap: 8px;
+            background: var(--white);
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .bot-input-area input {
+            flex: 1;
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            outline: none;
+        }
+
+        .bot-input-area input:focus {
+            border-color: #10a37f;
+        }
+
+        .bot-send-btn {
+            background: #10a37f;
+            color: var(--white);
+            border: none;
+            padding: 0 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #1e1b4b);
+            color: var(--white);
+            padding: 40px 5% 20px;
+            margin-top: auto;
+            border-top: 3px solid var(--accent);
+        }
+
+        .footer-content {
+            max-width: 1220px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .social-btn.tg { background: #0088cc; }
+        .social-btn.yt { background: #ff0000; }
+        .social-btn.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-btn.fb { background: #1877f2; }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            opacity: 0.92;
+        }
+
+        .footer-bottom {
+            max-width: 1220px;
+            margin: 20px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .creator-badge {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .top-bar {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                gap: 10px;
+            }
+            .top-spacer { display: none; }
+            .lang-switcher { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .top-info { font-size: 0.95rem; gap: 12px; }
+            .logo { flex-direction: column; gap: 10px; }
+            .logo-text { align-items: center; }
+            .logo-text h1 { font-size: 1.35rem; }
+            .logo-text span { font-size: 0.95rem; }
+            .nav-tabs { justify-content: center; }
+            .tab-content { padding: 25px 20px; }
+            .hero-box h1 { font-size: 1.7rem; }
+            .admin-float span, .bot-float-btn span { display: none; }
+            .admin-float, .bot-float-btn { padding: 14px; border-radius: 50%; }
+            .bot-window { bottom: 142px; }
+        }
+
+        /* ===== Olib tashlangan ikonalar uchun tuzatishlar ===== */
+        .logo-icon { font-weight: 800; font-family: Georgia, serif; }
+        .leader-avatar { font-size: 1.5rem; font-weight: 800; letter-spacing: 1px; }
+        .bot-send-btn { font-size: 0.82rem; font-weight: 700; }
+        .bot-pulse { flex-shrink: 0; }
+        .top-info span { gap: 0; }
+
+        .card .leader-badge { margin-bottom: 12px; }
+
+        /* ===== Bo'limga o'tish dizayni ===== */
+        .nav-tab { user-select: none; }
+        .nav-tab:active { transform: translateY(0) scale(0.96); }
+        .nav-tab.active { transform: translateY(-1px); }
+
+        .page-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px; width: 0;
+            background: linear-gradient(90deg, var(--primary), var(--vibrant-blue), var(--accent));
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .page-progress.run { animation: progressRun 0.7s ease forwards; }
+        @keyframes progressRun {
+            0%   { width: 0;    opacity: 1; }
+            70%  { width: 85%;  opacity: 1; }
+            100% { width: 100%; opacity: 0; }
+        }
+
+        .tab-content.active { animation: sectionIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes sectionIn {
+            from { opacity: 0; transform: translateY(26px) scale(0.985); filter: blur(5px); }
+            to   { opacity: 1; transform: translateY(0) scale(1);       filter: blur(0); }
+        }
+
+        .tab-content.active .card,
+        .tab-content.active .leader-card,
+        .tab-content.active .styled-list li {
+            animation: itemIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .tab-content.active .grid-3 > *:nth-child(1), .tab-content.active .styled-list li:nth-child(1) { animation-delay: 0.08s; }
+        .tab-content.active .grid-3 > *:nth-child(2), .tab-content.active .styled-list li:nth-child(2) { animation-delay: 0.16s; }
+        .tab-content.active .grid-3 > *:nth-child(3), .tab-content.active .styled-list li:nth-child(3) { animation-delay: 0.24s; }
+        .tab-content.active .grid-3 > *:nth-child(4), .tab-content.active .styled-list li:nth-child(4) { animation-delay: 0.32s; }
+        .tab-content.active .grid-3 > *:nth-child(5), .tab-content.active .styled-list li:nth-child(5) { animation-delay: 0.40s; }
+        @keyframes itemIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* "Keyingi bo'lim" va asosiy tugmalar: chiroyli bosilish effekti */
+        .btn-next, .btn-primary {
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.2px;
+        }
+        .btn-next::after, .btn-primary::after {
+            content: '';
+            width: 8px; height: 8px;
+            border-top: 2.5px solid currentColor;
+            border-right: 2.5px solid currentColor;
+            transform: rotate(45deg);
+            margin-left: 4px;
+            transition: transform 0.3s ease;
+        }
+        .btn-next:hover::after, .btn-primary:hover::after { transform: rotate(45deg) translate(3px, -3px); }
+        .btn-next:active, .btn-primary:active { transform: scale(0.95); }
+        .btn-next.back::after { display: none; }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+        .nav-tab .ripple { background: rgba(26, 35, 126, 0.25); }
+        .nav-tab.active .ripple { background: rgba(255, 255, 255, 0.5); }
+        
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tab-content.active, .tab-content.active .card, .tab-content.active .leader-card,
+            .tab-content.active .styled-list li, .page-progress.run { animation: none; opacity: 1; }
+        }
+
+        /* ===== Soat + Tun/Tong tugmasi ===== */
+        .top-tools {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .clock {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 5px 8px;
+            border-radius: 12px;
+            background: rgba(6, 10, 38, 0.6);
+            border: 1px solid rgba(15, 191, 249, 0.75);
+            box-shadow: 0 0 10px rgba(15, 191, 249, 0.55), inset 0 0 10px rgba(15, 191, 249, 0.22);
+            animation: clockGlow 2.6s ease-in-out infinite;
+        }
+        .clock .unit {
+            min-width: 30px;
+            text-align: center;
+            padding: 3px 4px;
+            border-radius: 7px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+            font-family: Consolas, "Courier New", monospace;
+            font-weight: 700;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+            color: #e6fbff;
+            text-shadow: 0 0 8px #0fbff9, 0 0 14px rgba(15, 191, 249, 0.7);
+            font-variant-numeric: tabular-nums;
+        }
+        .clock .sep {
+            font-family: Consolas, "Courier New", monospace;
+            font-weight: 700;
+            color: #7fe3ff;
+            text-shadow: 0 0 8px #0fbff9;
+            animation: sepBlink 1s steps(1) infinite;
+        }
+        @keyframes sepBlink { 50% { opacity: 0.25; } }
+        @keyframes clockGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(15, 191, 249, 0.45), inset 0 0 8px rgba(15, 191, 249, 0.18); }
+            50%      { box-shadow: 0 0 18px rgba(15, 191, 249, 0.95), inset 0 0 12px rgba(15, 191, 249, 0.35); }
+        }
+
+        .theme-btn {
+            position: relative;
+            width: 40px;
+            height: 38px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(6, 10, 38, 0.6);
+            border: 1px solid rgba(251, 191, 36, 0.85);
+            color: #fbbf24;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.6), inset 0 0 8px rgba(251, 191, 36, 0.22);
+            animation: sunGlow 2.6s ease-in-out infinite;
+            transition: transform 0.25s ease, border-color 0.4s, color 0.4s;
+        }
+        .theme-btn:hover { transform: translateY(-2px) scale(1.06); }
+        .theme-btn:active { transform: scale(0.92); }
+        .theme-btn svg {
+            position: absolute;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+            filter: drop-shadow(0 0 5px currentColor);
+        }
+        .theme-btn .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+        @keyframes sunGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.45), inset 0 0 8px rgba(251, 191, 36, 0.18); }
+            50%      { box-shadow: 0 0 18px rgba(251, 191, 36, 0.95), inset 0 0 12px rgba(251, 191, 36, 0.35); }
+        }
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(167, 139, 250, 0.45), inset 0 0 8px rgba(167, 139, 250, 0.18); }
+            50%      { box-shadow: 0 0 18px rgba(167, 139, 250, 0.95), inset 0 0 12px rgba(167, 139, 250, 0.35); }
+        }
+        body.dark .theme-btn {
+            color: #c4b5fd;
+            border-color: rgba(167, 139, 250, 0.85);
+            animation-name: moonGlow;
+        }
+        body.dark .theme-btn .icon-sun  { opacity: 0; transform: rotate(90deg) scale(0.4); }
+        body.dark .theme-btn .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
+
+        @media (max-width: 900px) { .top-tools { justify-content: center; } }
+        @media (max-width: 480px) { .clock .unit { min-width: 26px; font-size: 0.95rem; } }
+
+        /* ===== TUN rejimi ===== */
+        body, header, .tab-content, .card, .leader-card, .leader-meta, .nav-tab,
+        .styled-list li, .contact-map-wrapper, .bot-window, .bot-messages {
+            transition: background 0.45s ease, background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+        }
+        body.dark { background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 50%, #0b1a2b 100%); color: #e2e8f0; }
+        body.dark header { background: rgba(12, 18, 36, 0.96); box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); }
+        body.dark .logo-text h1 { background: linear-gradient(90deg, #a5b4fc, #7dd3fc, #c4b5fd); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        body.dark .logo-text span { color: #94a3b8; }
+        body.dark .nav-tab:not(.active) { background: #172036; border-color: #2a3858; color: #e2e8f0; }
+        body.dark .nav-tab:not(.active):hover { background: #1f2d4d; color: #c7d2fe; border-color: var(--vibrant-blue); }
+        body.dark .tab-content { background: #101830; border-color: #1f2b49; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45); }
+        body.dark .section-header h2 { color: #a5b4fc; }
+        body.dark .card { background: linear-gradient(180deg, #15203a 0%, #0f1a31 100%); border-color: #25335a; }
+        body.dark .card h3, body.dark .leader-name { color: #a5b4fc; }
+        body.dark .card p { color: #cbd5e1; }
+        body.dark .leader-card { background: linear-gradient(180deg, #15203a 0%, #0f1c33 100%); border-color: #25456a; }
+        body.dark .leader-meta { background: #0c1428; border-color: #25335a; color: #cbd5e1; }
+        body.dark .styled-list li { background: #15203a; color: #e2e8f0; }
+        body.dark .next-section-bar { border-top-color: #2a3858; }
+        body.dark .contact-map-wrapper { background: #0f1a31; border-color: #25335a; }
+        body.dark .contact-map-top h3 { color: #a5b4fc; }
+        body.dark .map-box-large { border-color: #2a3858; }
+        body.dark .bot-window { background: #101830; border-color: #2a3858; }
+        body.dark .bot-messages { background: #0a1224; }
+        body.dark .msg.bot { background: #1d3557; color: #e2e8f0; }
+        body.dark .bot-quick-btns { background: #15203a; border-top-color: #2a3858; }
+        body.dark .quick-q { background: #0c1428; border-color: #2a3858; color: #a5b4fc; }
+        body.dark .quick-q:hover { background: var(--primary); color: #fff; }
+        body.dark .bot-input-area { background: #101830; border-top-color: #2a3858; }
+        body.dark .bot-input-area input { background: #0a1224; border-color: #2a3858; color: #e2e8f0; }
+        body.dark .map-box-large iframe { filter: invert(0.9) hue-rotate(180deg) brightness(0.95) contrast(0.9); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .clock, .theme-btn, .clock .sep { animation: none; }
+        }
+
+        /* ===== Til tanlash (bitta tugma + ochiladigan ro'yxat) ===== */
+        .lang-switcher { position: relative; display: block; }
+        .lang-current {
+            height: 38px;
+            padding: 0 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: var(--transition);
+        }
+        .lang-current:hover, .lang-switcher.open .lang-current {
+            background: linear-gradient(135deg, var(--accent), #05fb3a);
+            border-color: var(--accent);
+            box-shadow: 0 3px 12px rgba(255, 46, 99, 0.45);
+        }
+        .lang-caret {
+            width: 7px; height: 7px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform 0.3s ease;
+        }
+        .lang-switcher.open .lang-caret { transform: rotate(225deg) translate(-1px, -1px); }
+
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 100%;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            padding: 6px;
+            border-radius: 12px;
+            background: #16134a;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 14px 30px rgba(5, 8, 40, 0.5);
+            z-index: 1500;
+        }
+        .lang-switcher.open .lang-menu { display: flex; animation: langPop 0.22s ease both; }
+        @keyframes langPop {
+            from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .lang-opt {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .lang-opt:hover { background: linear-gradient(135deg, var(--accent), var(--vibrant-blue)); }
+        .lang-opt.hidden { display: none; }
+
+        /* ===== Soat: yangi rang (lime-yashil) va harakatlanuvchi gradient ramka ===== */
+        .clock {
+            padding: 2px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #b6ff5c, #22d3a0, #facc15, #ff7ad9, #b6ff5c);
+            background-size: 300% 100%;
+            animation: frameFlow 5s linear infinite, clockGlow2 2.4s ease-in-out infinite;
+        }
+        .clock-in {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 5px 8px;
+            border-radius: 12px;
+            background: radial-gradient(ellipse at top, #12183f 0%, #060a24 80%);
+        }
+        .clock .unit {
+            color: #eaffc2;
+            background: linear-gradient(180deg, rgba(182,255,92,0.22), rgba(182,255,92,0.05));
+            border: 1px solid rgba(182, 255, 92, 0.28);
+            text-shadow: 0 0 8px #b6ff5c, 0 0 16px rgba(182, 255, 92, 0.75);
+        }
+        .clock .sep {
+            color: #facc15;
+            text-shadow: 0 0 8px #facc15;
+        }
+        @keyframes frameFlow { to { background-position: 300% 0; } }
+        @keyframes clockGlow2 {
+            0%, 100% { box-shadow: 0 0 8px rgba(182, 255, 92, 0.45), 0 0 18px rgba(255, 122, 217, 0.2); }
+            50%      { box-shadow: 0 0 18px rgba(182, 255, 92, 0.9), 0 0 30px rgba(255, 122, 217, 0.45); }
+        }
+
+        /* ===== Soat: varoq (flip) raqamlar ===== */
+        .flip {
+            --w: 32px; --h: 38px;
+            position: relative;
+            width: var(--w);
+            height: var(--h);
+            perspective: 220px;
+            font-family: Consolas, "Courier New", monospace;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #eaffc2;
+            text-shadow: 0 0 8px #b6ff5c, 0 0 16px rgba(182, 255, 92, 0.7);
+        }
+        .flip .half {
+            position: absolute;
+            left: 0; right: 0;
+            height: 50%;
+            overflow: hidden;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip .top {
+            top: 0;
+            border-radius: 7px 7px 0 0;
+            background: linear-gradient(180deg, #2c431a, #1b2c11);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+        }
+        .flip .bottom {
+            bottom: 0;
+            border-radius: 0 0 7px 7px;
+            background: linear-gradient(180deg, #14210d, #1f3214);
+        }
+        .flip .half span {
+            position: absolute;
+            left: 0; right: 0;
+            height: var(--h);
+            line-height: var(--h);
+            text-align: center;
+        }
+        .flip .top span { top: 0; }
+        .flip .bottom span { bottom: 0; }
+
+        .flip .leaf-top {
+            z-index: 3;
+            transform-origin: bottom center;
+            animation: flipTop 0.3s ease-in forwards;
+        }
+        .flip .leaf-bottom {
+            z-index: 2;
+            transform-origin: top center;
+            transform: rotateX(90deg);
+            animation: flipBottom 0.3s ease-out 0.3s forwards;
+        }
+        @keyframes flipTop {
+            from { transform: rotateX(0deg);   filter: brightness(1); }
+            to   { transform: rotateX(-90deg); filter: brightness(0.55); }
+        }
+        @keyframes flipBottom {
+            from { transform: rotateX(90deg); filter: brightness(0.55); }
+            to   { transform: rotateX(0deg);  filter: brightness(1); }
+        }
+        @media (max-width: 480px) {
+            .flip { --w: 26px; --h: 32px; font-size: 1.1rem; }
+        }
+
+        /* ===== Til tanlash: alohida ajralib turadigan rang (binafsha-magenta) ===== */
+        .lang-current {
+            color: #ffffff;
+            background: linear-gradient(135deg, #7c3aed 0%, #c026d3 100%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 4px 14px rgba(192, 38, 211, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            text-shadow: 0 1px 2px rgba(60, 0, 80, 0.5);
+        }
+        .lang-current:hover, .lang-switcher.open .lang-current {
+            background: linear-gradient(135deg, #8b5cf6 0%, #e040fb 100%);
+            border-color: #ffffff;
+            box-shadow: 0 6px 20px rgba(224, 64, 251, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            transform: translateY(-1px);
+        }
+        .lang-menu {
+            background: linear-gradient(180deg, #2a0f4d, #1c0a38);
+            border: 1px solid rgba(217, 70, 239, 0.7);
+            box-shadow: 0 14px 30px rgba(40, 0, 70, 0.6), 0 0 16px rgba(192, 38, 211, 0.45);
+        }
+        .lang-opt { color: #f5e1ff; }
+        .lang-opt:hover {
+            background: linear-gradient(135deg, #7c3aed, #d946ef);
+            color: #ffffff;
+        }
+
+                header {
+            position: static;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-progress" id="pageProgress"></div>
+
+    <!-- Top Info & 3 Language Switcher -->
+    <div class="top-bar">
+        <div class="top-spacer"></div>
+        <div class="top-info">
+            <span><b data-lang="top_loc">Toshkent viloyati, Oqqo'rg'on tumani</b></span>
+        </div>
+        <!-- ★ YANGI: Soat + Tun/Tong tugmasi + Til tugmalari yonma-yon -->
+        <div class="top-tools">
+            <div class="clock" id="clock" aria-label="Soat">
+                <div class="clock-in">
+                    <div class="flip" id="clkH"><div class="half top"><span>00</span></div><div class="half bottom"><span>00</span></div></div><span class="sep">:</span><div class="flip" id="clkM"><div class="half top"><span>00</span></div><div class="half bottom"><span>00</span></div></div><span class="sep">:</span><div class="flip" id="clkS"><div class="half top"><span>00</span></div><div class="half bottom"><span>00</span></div></div>
+                </div>
+            </div>
+
+            <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Tun / Tong" title="Tun / Tong">
+                <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+                    <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/>
+                    <circle cx="17.5" cy="5.5" r="0.9"/><circle cx="20.2" cy="8.7" r="0.6"/>
+                </svg>
+            </button>
+
+            <!-- Til tanlash: bitta tugma, bosilganda qolgan tillar ochiladi -->
+            <div class="lang-switcher" id="langSwitcher">
+                <button class="lang-current" id="langCurrent" onclick="toggleLangMenu(event)" aria-haspopup="true" aria-expanded="false">
+                    <span id="langLabel">O'ZB</span><span class="lang-caret"></span>
+                </button>
+                <div class="lang-menu" id="langMenu">
+                    <button class="lang-opt" data-code="uz" onclick="setLanguage('uz')">O'ZB</button>
+                    <button class="lang-opt" data-code="ru" onclick="setLanguage('ru')">РУС</button>
+                    <button class="lang-opt" data-code="en" onclick="setLanguage('en')">ENG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Navigation Tabs -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="openTab(0)">
+                <div class="logo-text">
+                    <h1 data-lang="site_title">Oqqo'rg'on tuman 2-son texnikumi</h1>
+                    <span data-lang="site_sub">Kasbiy ta'lim tashkiloti</span>
+                </div>
+            </a>
+
+            <ul class="nav-tabs" id="navTabs">
+                <li class="nav-tab active" onclick="openTab(0)"><span data-lang="nav_home">Bosh sahifa</span></li>
+                <li class="nav-tab" onclick="openTab(1)"><span data-lang="nav_about">Texnikum haqida</span></li>
+                <li class="nav-tab" onclick="openTab(2)"><span data-lang="nav_leadership">Rahbariyat</span></li>
+                <li class="nav-tab" onclick="openTab(3)"><span data-lang="nav_majors">Yo'nalishlar</span></li>
+                <!-- ★ YANGI BO'LIM TUGMASI: Dual ta'lim -->
+                <li class="nav-tab" onclick="openTab(4)"><span data-lang="nav_dual">Dual ta'lim</span></li>
+                <li class="nav-tab" onclick="openTab(5)"><span data-lang="nav_admission">Qabul 2026</span></li>
+                <li class="nav-tab" onclick="openTab(6)"><span data-lang="nav_news">Yangiliklar</span></li>
+                <li class="nav-tab" onclick="openTab(7)"><span data-lang="nav_contact">Aloqa</span></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Sections -->
+    <main>
+        <!-- 1. BOSH SAHIFA -->
+        <section class="tab-content active" id="tab-0">
+            <div class="hero-box">
+                <h1 data-lang="hero_title">Kelajak kasblarini biz bilan o'rganing!</h1>
+                <p data-lang="hero_desc">Oqqo'rg'on tuman 2-son texnikumi — zamonaviy bilimlar, amaliy ko'nikmalar va kafolatlangan kasb egasi bo'lish maskani.</p>
+                <button class="btn-primary" onclick="openTab(3)">
+                    <span data-lang="hero_btn">Yo'nalishlarni ko'rish</span>                 </button>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3 data-lang="feat1_t">Malakali ustozlar</h3>
+                    <p data-lang="feat1_d">Ko'p yillik tajribaga ega o'qituvchilar va ishlab chiqarish ta'limi ustalari.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="feat2_t">Zamonaviy ustaxonalar</h3>
+                    <p data-lang="feat2_d">Amaliy mashg'ulotlar uchun barcha sharoitlarga ega o'quv xonalari va laboratoriyalar.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="feat3_t">Davlat namunasi diplomi</h3>
+                    <p data-lang="feat3_d">Bitiruvchilarga o'rta maxsus professional ta'lim to'g'risida davlat diplomi beriladi.</p>
+                </div>
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(1)">
+                    <span data-lang="next_about">Keyingi bo'lim</span>                 </button>
+            </div>
+        </section>
+
+        <!-- 2. TEXNIKUM HAQIDA -->
+        <section class="tab-content" id="tab-1">
+            <div class="section-header">
+                <h2 data-lang="about_title">Texnikum haqida ma'lumot</h2>
+            </div>
+            <p style="line-height: 1.8; margin-bottom: 25px; font-size: 1.05rem;" data-lang="about_text">
+                Oqqo'rg'on tuman 2-son texnikumi O'zbekiston Respublikasi Ta'lim va ilm fan huzuridagi Kasbiy ta'lim agentligi . Texnikumda o'quvchilar nazariy bilimlarni bevosita amaliyot bilan uyg'unlashtirgan holda o'rganadilar.
+            </p>
+            <div class="grid-3">
+                <div class="card">
+                    <h3 data-lang="dir_role">OQQO'RG'ON TUMANI 2-SON TEXNIKUMI DIREKTORI</h3>
+                    <p><strong>F.I.Sh:</strong> <span data-lang="dir_name"> Ulug'oy Xudaynazarova Ismailovna</span></p>
+                    <p><strong data-lang="rec_days">Qabul kunlari:</strong> Dushanba - Juma (09:00 - 16:00)</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="stat_students">O'quvchilar soni</h3>
+                    <p style="font-size: 2rem; font-weight: bold; color: var(--accent);">450+</p>
+                    <p data-lang="stat_s_desc">Hozirda tahsil olayotgan yoshlar</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="stat_teachers">Pedagoglar tarkibi</h3>
+                    <p style="font-size: 2rem; font-weight: bold; color: var(--primary);">35+</p>
+                    <p data-lang="stat_t_desc">Oliy va birinchi toifali mutaxassislar</p>
+                </div>
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(2)">
+                    <span data-lang="next_leadership">Keyingi bo'lim</span>                 </button>
+            </div>
+        </section>
+
+        <!-- 3. RAHBARIYAT -->
+        <section class="tab-content" id="tab-2">
+            <div class="section-header">
+                <h2 data-lang="lead_title">Texnikum rahbariyati</h2>
+            </div>
+
+            <div class="grid-3">
+                <!-- Direktor -->
+                <div class="leader-card">
+                    <div class="leader-avatar">XU</div>
+                    <span class="leader-badge" data-lang="lead_dir_badge">OQQO'RG'ON TUMAN 2-SON TEXNIKUMI DIREKTORI</span>
+                    <div class="leader-name">Xudaynazarova Ulug'oy Ismailovna</div>
+                    <div class="leader-meta">
+                        <div><strong data-lang="lbl_phone">Tel:</strong> +998 90 321 68 89</div>
+                        <div><strong data-lang="lbl_days">Qabul vaqti:</strong> Dushanba–Juma, 09:00–12:00</div>
+                    </div>
+                </div>
+
+                <!-- 1-o'rinbosar -->
+                <div class="leader-card">
+                    <div class="leader-avatar">AS</div>
+                    <span class="leader-badge" data-lang="lead_dep1_badge">O'QUV ISHLARI BO'YICHA DIRKTOR O'RINBOSARI</span>
+                    <div class="leader-name">Alijonova Saida Nimatjonovna</div>
+                    <div class="leader-meta">
+                        <div><strong data-lang="lbl_phone">Tel:</strong> +998 99 037 66 90</div>
+                        <div><strong data-lang="lbl_days">Qabul vaqti:</strong> Dushanba–Payshanba, 14:00–17:00</div>
+                    </div>
+                </div>
+
+                <!-- 2-o'rinbosar -->
+<!-- ★★★ YANGI QO'SHILGAN ZAMDIREKTOR KARTASI (BOSHLANISHI) ★★★ -->
+              <div class="leader-card">
+              <div class="leader-avatar">F.I</div>
+              <span class="leader-badge" data-lang="lead_dep4_badge">ISHLAB CHIQARISH TALIMI BO'YICHA DIREKTOR O'RINBOSARI</span>
+               <div class="leader-name">Norboyev Jasurbek Sunnat o'g'li</div>
+                  <div class="leader-meta">
+              <div><strong data-lang="lbl_phone">Tel:</strong> +998 20 022 20 98</div>
+               <div><strong data-lang="lbl_days">Qabul vaqti:</strong> Dushanba–Juma, 14:00–17:00</div>
+             </div>
+         </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">DN</div>
+                    <span class="leader-badge" data-lang="lead_dep2_badge">YOSHLAR ISHLARI BO'YICHA DIREKTOR O'RINBOSARI</span>
+                    <div class="leader-name">Davruboyev Nodir Turapbayevich</div>
+                    <div class="leader-meta">
+                        <div><strong data-lang="lbl_phone">Tel:</strong> +998 93 768 14 86</div>
+                        <div><strong data-lang="lbl_days">Qabul vaqti:</strong> Chorshanba–Juma, 14:00–17:00</div>
+                    </div>
+                </div>
+
+                <!-- ★★★ YANGI QO'SHILGAN 3-ZAMDIREKTOR KARTASI (BOSHLANISHI) ★★★ -->
+                <div class="leader-card">
+                    <div class="leader-avatar">F.I</div>
+                    <span class="leader-badge" data-lang="lead_dep3_badge">TA'LIM SIFATINI TA'MINLASH BO'YICHA BOSH MUTAXASSIS</span>
+                    <div class="leader-name">Tulayev Mirkamol Toirovich</div>
+                    <div class="leader-meta">
+                        <div><strong data-lang="lbl_phone">Tel:</strong> +99890 14 01 66</div>
+                        <div><strong data-lang="lbl_days">Qabul vaqti:</strong> Dushanba–Juma, 14:00–17:00</div>
+                    </div>
+                </div>
+                <!-- ★★★ YANGI QO'SHILGAN 3-ZAMDIREKTOR KARTASI (TUGASHI) ★★★ -->
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(3)">
+                    <span data-lang="next_majors">Keyingi bo'lim/span>                 </button>
+            </div>
+        </section>
+
+        <!-- 4. YO'NALISHLAR -->
+        <section class="tab-content" id="tab-3">
+            <div class="section-header">
+                <h2 data-lang="majors_title">Ta'lim yo'nalishlari (Kasblar)</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3 data-lang="m1_t">Kompyuter injiniringi</h3>
+                    <p data-lang="m1_d">Dasturlash asoslari, ofis dasturlari va kompyuter tarmoqlariga texnik xizmat ko'rsatish. O'qish muddati: 2 yil.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="m2_t">Buxgalteriya hisobi va audit</h3>
+                    <p data-lang="m2_d">Korxona moliyasi, 1C dasturi va soliq hisobotlarini yuritish mutaxassisi. O'qish muddati: 2 yil.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="m3_t">Avtomobillarga xizmat ko'rsatish</h3>
+                    <p data-lang="m3_d">Avtomobillarni ta'mirlash, diagnostika qilish va texnik xizmat ko'rsatish ustasi. O'qish muddati: 2 yil.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="m4_t">Tikuvchilik va dizayn</h3>
+                    <p data-lang="m4_d">Zamonaviy kiyimlarni modellashtirish, bichish va tikish texnologiyasi. O'qish muddati: 2 yil.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="m5_t">Elektr montaj ishlari</h3>
+                    <p data-lang="m5_d">Sanoat va maishiy elektr tarmoqlarini o'rnatish hamda ta'mirlash mutaxassisi. O'qish muddati: 2 yil.</p>
+                </div>
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(4)">
+                    <span data-lang="next_dual">Keyingi bo'lim</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ★★★ YANGI BO'LIM: DUAL TA'LIM (BOSHLANISHI) ★★★ -->
+        <section class="tab-content" id="tab-dual">
+            <div class="section-header">
+                <h2 data-lang="dual_title">Dual ta'limdagi maktabgacha ta'lim yo'nalishlari</h2>
+            </div>
+            <p style="line-height: 1.8; margin-bottom: 25px; font-size: 1.05rem;" data-lang="dual_intro">
+                Dual ta'limda o'quvchilar nazariy bilimlarni texnikumda oladi, amaliy ko'nikmalarni esa to'g'ridan-to'g'ri maktabgacha ta'lim tashkilotlarida o'rganadi.
+            </p>
+
+            <div class="grid-3">
+                <!-- 1-yo'nalish -->
+                <div class="card">
+                    <span class="leader-badge" data-lang="dual_badge">DUAL TA'LIM</span>
+                    <h3>1-yo'nalish nomini yozing</h3>
+                    <p>Yo'nalish haqida qisqa ma'lumotni shu yerga yozing.</p>
+                    <p style="margin-top: 10px;"><strong data-lang="lbl_term">O'qish muddati:</strong> ___ yil</p>
+                    <p><strong data-lang="lbl_place">Amaliyot joyi:</strong> Tashkilot nomini yozing</p>
+                </div>
+
+                <!-- 2-yo'nalish -->
+                <div class="card">
+                    <span class="leader-badge" data-lang="dual_badge">DUAL TA'LIM</span>
+                    <h3>2-yo'nalish nomini yozing</h3>
+                    <p>Yo'nalish haqida qisqa ma'lumotni shu yerga yozing.</p>
+                    <p style="margin-top: 10px;"><strong data-lang="lbl_term">O'qish muddati:</strong> ___ yil</p>
+                    <p><strong data-lang="lbl_place">Amaliyot joyi:</strong> Tashkilot nomini yozing</p>
+                </div>
+
+                <!-- 3-yo'nalish -->
+                <div class="card">
+                    <span class="leader-badge" data-lang="dual_badge">DUAL TA'LIM</span>
+                    <h3>3-yo'nalish nomini yozing</h3>
+                    <p>Yo'nalish haqida qisqa ma'lumotni shu yerga yozing.</p>
+                    <p style="margin-top: 10px;"><strong data-lang="lbl_term">O'qish muddati:</strong> ___ yil</p>
+                    <p><strong data-lang="lbl_place">Amaliyot joyi:</strong> Tashkilot nomini yozing</p>
+                </div>
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(5)">
+                    <span data-lang="next_admission">Keyingi bo'lim:</span>
+                </button>
+            </div>
+        </section>
+        <!-- ★★★ YANGI BO'LIM: DUAL TA'LIM (TUGASHI) ★★★ -->
+
+        <!-- 5. QABUL -->
+        <section class="tab-content" id="tab-4">
+            <div class="section-header">
+                <h2 data-lang="adm_title">Qabul jarayoni va kerakli hujjatlar</h2>
+            </div>
+            <p style="margin-bottom: 20px;" data-lang="adm_sub">Texnikumga 11-sinf bitiruvchilari kunduzgi va sirtqi ta'lim shakllariga qabul qilinadi:</p>
+            <ul class="styled-list">
+                <li><span data-lang="doc1">Direktor nomiga ariza</span></li>
+                <li><span data-lang="doc2">Pasport yoki ID-karta nusxasi</span></li>
+                <li><span data-lang="doc3">Umumiy o'rta ta'lim (11-sinf) attestati yoki diplom asl nusxasi</span></li>
+                <li><span data-lang="doc4">3x4 sm o'lchamdagi 6 dona rangli fotosurat</span></li>
+                <li><span data-lang="doc5">086-U shakldagi tibbiy ma'lumotnoma</span></li>
+            </ul>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(6)">
+                    <span data-lang="next_news">Keyingi bo'lim:</span>                 </button>
+            </div>
+        </section>
+
+        <!-- 6. YANGILIKLAR -->
+        <section class="tab-content" id="tab-5">
+            <div class="section-header">
+                <h2 data-lang="news_title">Texnikum yangiliklari va tadbirlar</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <small style="color: var(--accent); font-weight: bold;">15.11.2026</small>
+                    <h3 style="margin-top: 8px;" data-lang="n1_t">"Kasbim — faxrim" ko'rik-tanlovi</h3>
+                    <p data-lang="n1_d">Texnikum o'quvchilari o'rtasida amaliy ko'nikmalar bo'yicha musobaqa bo'lib o'tdi va g'oliblar taqdirlandi.</p>
+                </div>
+                <div class="card">
+                    <small style="color: var(--accent); font-weight: bold;">02.11.2026</small>
+                    <h3 style="margin-top: 8px;" data-lang="n2_t">Ochiq eshiklar kuni</h3>
+                    <p data-lang="n2_d">Tuman maktablarining bitiruvchi sinf o'quvchilari texnikum sharoitlari bilan yaqindan tanishdilar.</p>
+                </div>
+                <div class="card">
+                    <small style="color: var(--accent); font-weight: bold;">20.10.2026</small>
+                    <h3 style="margin-top: 8px;" data-lang="n3_t">Dual ta'lim amaliyoti</h3>
+                    <p data-lang="n3_d">O'quvchilarimiz tumandagi yirik korxonalarda ishlab chiqarish amaliyotini boshladilar.</p>
+                </div>
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next" onclick="openTab(7)">
+                    <span data-lang="next_contact">Keyingi bo'lim:</span>                 </button>
+            </div>
+        </section>
+
+        <!-- 7. ALOQA + JOYLASHUV XARITASI (SHU BO'LIM ICHIDA) -->
+        <section class="tab-content" id="tab-6">
+            <div class="section-header">
+                <h2 data-lang="cont_title">Biz bilan bog'lanish</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3 data-lang="cont_addr_t">Manzil</h3>
+                    <p data-lang="cont_addr_d">Toshkent viloyati, Oqqo'rg'on tumani , Xosildor MFY , Porloq yo'l ko'chasi 1-uy.</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="cont_phone_t">Telefon raqamlar</h3>
+                    <p>+998 (90) 321-68-89<br>+998 (99) 358-09-05</p>
+                </div>
+                <div class="card">
+                    <h3 data-lang="cont_work_t">Ish tartibi</h3>
+                    <p data-lang="cont_work_d">Dushanba – Shanba: 08:30 dan 16:00 gacha<br>Yakshanba: Dam olish kuni</p>
+                </div>
+            </div>
+
+            <!-- =====================================================================
+                 JOYLASHUV (XARITA) HAVOLASINI SHU YERGA TASHLANG:
+                 1) Quyidagi iframe src="..." ichiga Google Maps -> Share -> Embed a map
+                    havolasini qo'ying.
+                 2) Pastdagi <a href="..."> ichiga Google Maps ulashish havolasini qo'ying.
+                 ===================================================================== -->
+            <div class="contact-map-wrapper">
+                <div class="contact-map-top">
+                    <h3><span data-lang="map_section_title">Texnikum joylashuvi (Xarita)</span></h3>
+                    <a href="https://maps.app.goo.gl/CzWN9f94P3hhGtWV9" target="_blank" class="map-link-btn">
+                        <span data-lang="open_map_btn">Xaritada ochish</span>
+                    </a>
+                </div>
+                <div class="map-box-large">
+                    <iframe
+                        src="https://www.google.com/maps?q=Oqqorgon,+Tashkent+Region,+Uzbekistan&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="next-section-bar">
+                <button class="btn-next back" onclick="openTab(0)">
+                    <span data-lang="next_home">Bosh sahifaga qaytish</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================================
+         CHATGPT INTEGRATSIYALASHGAN AVTO-BOT OYNASI (O'NGDA)
+         ========================================================= -->
+    <div class="bot-window" id="botWindow">
+        <div class="bot-header">
+            <div class="bot-header-info">
+                <h4 data-lang="bot_title"> Sayt Yordamchi Bot</h4>
+                <span data-lang="bot_status">24/7 Avto-javob rejimi faol</span>
+            </div>
+            <button class="bot-close" onclick="toggleBot()">&times;</button>
+        </div>
+
+        <div class="bot-messages" id="botMessages">
+            <div class="msg bot" data-lang="bot_welcome">
+                Assalomu alaykum! Men Oqqo'rg'on tuman 2-son texnikumi sayti bo'yicha 24/7 yordamchi botman. Sayt bo'limlari, yo'nalishlar, qabul, rahbariyat yoki boshqa savol bering!
+            </div>
+        </div>
+
+        <div class="bot-quick-btns">
+            <button class="quick-q" onclick="askQuick('qabul')" data-lang="q_adm">Qabul</button>
+            <button class="quick-q" onclick="askQuick('yonalish')" data-lang="q_maj">Yo'nalishlar</button>
+            <button class="quick-q" onclick="askQuick('rahbariyat')" data-lang="q_lead">Rahbariyat</button>
+            <button class="quick-q" onclick="askQuick('manzil')" data-lang="q_loc">Manzil</button>
+        </div>
+
+        <div class="bot-input-area">
+            <input type="text" id="botInput" placeholder="Sayt haqida savol yozing..." onkeydown="if(event.key==='Enter') sendBotMessage()">
+            <button class="bot-send-btn" onclick="sendBotMessage()">Yuborish</button>
+        </div>
+    </div>
+
+    <!-- PASTKI O'NG BURCHAK: AVTO-BOT TUGMASI VA ADMIN TELEGRAM -->
+    <div class="right-float-stack">
+        <button class="bot-float-btn" onclick="toggleBot()" title="24/7 Avto-javob Bot">
+            <span class="bot-pulse"></span>
+                        <span data-lang="bot_btn">Avto-Bot</span>
+        </button>
+
+        <a href="https://t.me/Z205OZ" target="_blank" class="admin-float" title="Admin bilan bog'lanish">
+                        <span data-lang="admin_btn">Murojaat uchun</span>
+        </a>
+    </div>
+
+    <!-- Footer & Social Links -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3 data-lang="site_title">Oqqo'rg'on tuman 2-son texnikumi</h3>
+                <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 5px;" data-lang="footer_sub">Ijtimoiy tarmoqlardagi rasmiy sahifalarimiz:</p>
+            </div>
+
+            <div class="social-links">
+                <a href="https://t.me/ikkinchison_texnikum" target="_blank" class="social-btn tg">
+                    Telegram
+                </a>
+                <a href="https://youtube.com/@ikkinchi_son_texnikumi?si=Jk4gxEK06ovMYQdd" target="_blank" class="social-btn yt">
+                    YouTube
+                </a>
+                <a href="https://youtube.com/@ikkinchi_son_texnikumi?si=Jk4gxEK06ovMYQdd" target="_blank" class="social-btn ig">
+                    Instagram
+                </a>
+                <a href="https://www.facebook.com/share/1RmcHUuHG8/" target="_blank" class="social-btn fb">
+                    Facebook
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 <span data-lang="site_title">Oqqo'rg'on tuman 2-son texnikumi</span>.</span>
+            <span class="creator-badge">
+                <span data-lang="created_by">S.Kamolov:</span> <strong>ISMINGIZ FAMILIYANGIZ</strong>
+            </span>
+        </div>
+    </footer>
+
+    <!-- JavaScript: Tab Switching, 3 Languages, Site Knowledge + ChatGPT API -->
+    <script>
+        let currentLang = 'uz';
+
+        /* =====================================================================
+           CHATGPT (OPENAI API) INTEGRATSIYASI SOZLAMASI:
+           Agar ChatGPT javobini ulamoqchi bo'lsangiz, OPENAI_API_KEY ichiga
+           o'z OpenAI API kalitingizni yozing (masalan: "sk-...").
+           Bo'sh tursa, bot avval sayt ichidagi barcha ma'lumotlar asosida javob beradi.
+           ===================================================================== */
+        const OPENAI_API_KEY = "";
+        const OPENAI_MODEL = "gpt-4o-mini";
+
+        // Sayt ichidagi barcha bo'limlar bo'yicha ma'lumot bazasi
+        const siteKnowledge = `
+Muassasa nomi: Oqqo'rg'on tuman 2-son texnikumi (Kasbiy ta'lim tashkiloti).
+Joylashuvi: Toshkent viloyati, Oqqo'rg'on tumani Xosildor MFY,Porloq yo'l ko'chasi 1-uy.
+Telefonlar: +998 (90)321-68-89
+Ish tartibi: Dushanba – Shanba: 08:30 dan 17:00 gacha, Yakshanba: Dam olish kuni.
+Sayt bo'limlari: Bosh sahifa, Texnikum haqida, Rahbariyat, Yo'nalishlar, Dual ta'lim, Qabul 2026, Yangiliklar, Aloqa.
+Dual ta'lim bo'limida: dual ta'limda o'qiyotgan 3 ta maktabgacha ta'lim yo'nalishi haqida ma'lumot beriladi.
+Rahbariyat bo'limida: Direktor, O'quv ishlari bo'yicha o'rinbosar (zamdirektor) va Yoshlar ishlari bo'yicha o'rinbosar (zamdirektor) ma'lumotlari kiritiladi.
+Yo'nalishlar (muddati 2 yil):
+1) Kompyuter injiniringi (dasturlash asoslari, ofis dasturlari, kompyuter tarmoqlari);
+2) Buxgalteriya hisobi va audit (korxona moliyasi, 1C dasturi, soliq hisobotlari);
+3) Avtomobillarga xizmat ko'rsatish (ta'mirlash, diagnostika, texnik xizmat);
+4) Tikuvchilik va dizayn (modellashtirish, bichish, tikish texnologiyasi);
+5) Elektr montaj ishlari (sanoat va maishiy elektr tarmoqlari).
+Qabul 2026 kerakli hujjatlar (11-sinf bitiruvchilari uchun):
+- Direktor nomiga ariza
+- Pasport yoki ID-karta nusxasi
+- 11-sinf attestati yoki diplom asl nusxasi
+- 3x4 sm o'lchamdagi 6 dona rangli fotosurat
+- 086-U shakldagi tibbiy ma'lumotnoma.
+Yangiliklar: "Kasbim — faxrim" ko'rik-tanlovi, Ochiq eshiklar kuni, Dual ta'lim amaliyoti.
+Tillar: Sayt O'zbek (O'ZB), Rus (РУС) va Ingliz (ENG) tillarida ishlaydi.
+`;
+
+        function openTab(index) {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+
+            tabs[index].classList.add('active');
+            contents[index].classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const bar = document.getElementById('pageProgress');
+            bar.classList.remove('run');
+            void bar.offsetWidth;
+            bar.classList.add('run');
+        }
+
+        // Bosilganda to'lqin (ripple) effekti
+        document.addEventListener('click', function (e) {
+            const el = e.target.closest('.btn-next, .btn-primary');
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const r = document.createElement('span');
+            r.className = 'ripple';
+            r.style.width = r.style.height = size + 'px';
+            r.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            r.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+            el.appendChild(r);
+            setTimeout(() => r.remove(), 650);
+        });
+
+
+        // ===== Soat (soat:daqiqa:soniya) =====
+        function setFlip(el, val) {
+            const old = el.dataset.v;
+            if (old === val) return;
+            const topSpan = el.querySelector('.top > span');
+            const botSpan = el.querySelector('.bottom > span');
+            el.dataset.v = val;
+
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (old === undefined || reduce) {
+                topSpan.textContent = val;
+                botSpan.textContent = val;
+                return;
+            }
+
+            if (el.querySelector('.leaf-bottom')) botSpan.textContent = old;   // animatsiya tugamay qolgan bo'lsa
+            el.querySelectorAll('.leaf-top, .leaf-bottom').forEach(n => n.remove());
+            const prevBottom = botSpan.textContent;   // hozircha ko'rinib turgan (eski) pastki yarmi
+
+            topSpan.textContent = val;                // yuqori statik yarmi darhol yangi raqam
+
+            const leafTop = document.createElement('div');
+            leafTop.className = 'half top leaf-top';
+            leafTop.innerHTML = '<span>' + prevBottom + '</span>';
+
+            const leafBottom = document.createElement('div');
+            leafBottom.className = 'half bottom leaf-bottom';
+            leafBottom.innerHTML = '<span>' + val + '</span>';
+
+            el.appendChild(leafTop);
+            el.appendChild(leafBottom);
+
+            leafBottom.addEventListener('animationend', function () {
+                botSpan.textContent = val;
+                leafTop.remove();
+                leafBottom.remove();
+            });
+        }
+
+        function tickClock() {
+            const d = new Date();
+            const p = n => String(n).padStart(2, '0');
+            setFlip(document.getElementById('clkH'), p(d.getHours()));
+            setFlip(document.getElementById('clkM'), p(d.getMinutes()));
+            setFlip(document.getElementById('clkS'), p(d.getSeconds()));
+        }
+        tickClock();
+        setInterval(tickClock, 1000);
+
+        // ===== Tun / Tong rejimi =====
+        function toggleTheme() {
+            const dark = document.body.classList.toggle('dark');
+            try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+        }
+        try {
+            if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+        } catch (e) {}
+
+        function toggleBot() {
+            document.getElementById('botWindow').classList.toggle('open');
+        }
+
+        const localSiteAnswers = {
+            uz: {
+                qabul: "Qabul (2026) bo'limiga ko'ra 11-sinf bitiruvchilaridan quyidagi hujjatlar so'raladi:\n• Direktor nomiga ariza\n• Pasport yoki ID-karta nusxasi\n• 11-sinf attestati yoki diplom asl nusxasi\n• 3x4 rasm (6 dona)\n• 086-U tibbiy ma'lumotnoma.",
+                yonalish: "Texnikumdagi yo'nalishlar (2 yil):\n1. Kompyuter injiniringi\n2. Buxgalteriya hisobi va audit\n3. Avtomobillarga xizmat ko'rsatish\n4. Tikuvchilik va dizayn\n5. Elektr montaj ishlari.",
+                rahbariyat: "Rahbariyat bo'limida Direktor hamda 1- va 2-o'rinbosarlar (zamdirektorlar) F.I.Sh., telefon, qabul vaqti va aloqa ma'lumotlari joylashgan.",
+                manzil: "Manzil: Toshkent viloyati, Oqqo'rg'on tumani.\nIsh vaqti: Dushanba–Shanba (08:30–17:00), Yakshanba — dam olish.\nXarita 'Aloqa' bo'limi ichida joylashgan.",
+                yangilik: "Yangiliklar bo'limida 'Kasbim — faxrim' ko'rik-tanlovi, Ochiq eshiklar kuni va Dual ta'lim amaliyoti haqida ma'lumotlar berilgan.",
+                til: "Sayt yuqori panelidagi O'ZB, РУС va ENG tugmalari orqali 3 ta tilga o'tadi.",
+                umumiy: "Oqqo'rg'on tuman 2-son texnikumi saytida Bosh sahifa, Texnikum haqida, Rahbariyat, Yo'nalishlar, Qabul 2026, Yangiliklar va Aloqa bo'limlari mavjud. Aniqroq savol bersangiz, batafsil javob beraman!"
+            },
+            ru: {
+                qabul: "Для приёма (2026) выпускникам 11 классов нужны:\n• Заявление на имя директора\n• Копия паспорта или ID-карты\n• Оригинал аттестата или диплома (11 класс)\n• 6 фото 3x4\n• Справка 086-У.",
+                yonalish: "Направления техникума (2 года):\n1. Компьютерный инжиниринг\n2. Бухгалтерский учёт и аудит\n3. Обслуживание автомобилей\n4. Швейное дело и дизайн\n5. Электромонтажные работы.",
+                rahbariyat: "В разделе «Руководство» размещены данные директора и заместителей (Ф.И.О., телефон, приём и контакты).",
+                manzil: "Адрес: Ташкентская область, Аккурганский район.\nРежим работы: Пн–Сб (08:30–17:00), Вс — выходной.\nКарта находится внутри раздела «Контакты».",
+                yangilik: "В разделе «Новости» опубликованы материалы о конкурсе «Моя профессия — моя гордость», Дне открытых дверей и дуальной практике.",
+                til: "Сайт поддерживает 3 языка через кнопки O'ZB, РУС и ENG вверху.",
+                umumiy: "На сайте Аккурганского районного техникума №2 есть разделы: Главная, О техникуме, Руководство, Направления, Приём 2026, Новости и Контакты."
+            },
+            en: {
+                qabul: "Admission (2026) documents for 11th-grade graduates:\n• Application to the Director\n• Passport or ID-card copy\n• Original 11th-grade certificate or diploma\n• 6 photos (3x4)\n• Medical form 086-U.",
+                yonalish: "Programs at the technical school (2 years):\n1. Computer Engineering\n2. Accounting and Audit\n3. Automotive Maintenance\n4. Sewing and Fashion Design\n5. Electrical Installation.",
+                rahbariyat: "The Leadership section contains Director and Deputy Directors details (name, phone, hours, contacts).",
+                manzil: "Location: Tashkent region, Akkurgan district.\nHours: Mon–Sat (08:30–17:00), Sun — closed.\nThe map is inside the 'Contact' section.",
+                yangilik: "The News section features the 'My Profession — My Pride' contest, Open Doors Day, and Dual Education practice.",
+                til: "The site switches between 3 languages via O'ZB, РУС, and ENG buttons at the top.",
+                umumiy: "The site includes Home, About Us, Leadership, Programs, Admission 2026, News, and Contact sections."
+            }
+        };
+
+        function findLocalSiteAnswer(text) {
+            const t = text.toLowerCase();
+            const ans = localSiteAnswers[currentLang] || localSiteAnswers.uz;
+            if (t.includes('qabul') || t.includes('hujjat') || t.includes('прием') || t.includes('докум') || t.includes('admis')) return ans.qabul;
+            if (t.includes('yonalish') || t.includes('kasb') || t.includes('направ') || t.includes('програм') || t.includes('o\'qish')) return ans.yonalish;
+            if (t.includes('rahbar') || t.includes('direktor') || t.includes('zam') || t.includes('руковод') || t.includes('lead')) return ans.rahbariyat;
+            if (t.includes('manzil') || t.includes('joylash') || t.includes('xarita') || t.includes('soat') || t.includes('адрес') || t.includes('карт') || t.includes('locat')) return ans.manzil;
+            if (t.includes('yangilik') || t.includes('tadbir') || t.includes('новост') || t.includes('news')) return ans.yangilik;
+            if (t.includes('til') || t.includes('rus') || t.includes('ingliz') || t.includes('язык') || t.includes('lang')) return ans.til;
+            if (t.includes('sayt') || t.includes('texnikum') || t.includes('bo\'lim') || t.includes('сайт') || t.includes('техникум') || t.includes('site')) return ans.umumiy;
+            return null;
+        }
+
+        async function askChatGPT(userQuestion) {
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + OPENAI_API_KEY
+                },
+                body: JSON.stringify({
+                    model: OPENAI_MODEL,
+                    temperature: 0.4,
+                    messages: [
+                        {
+                            role: "system",
+                            content: "Siz Oqqo'rg'on tuman 2-son texnikumi veb-saytining aqlli 24/7 yordamchisiz. Foydalanuvchi savollariga faqat quyidagi sayt ma'lumotlariga tayanib, qisqa, aniq va foydalanuvchi tilida javob bering:\n" + siteKnowledge
+                        },
+                        {
+                            role: "user",
+                            content: userQuestion
+                        }
+                    ]
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error("OpenAI API request failed");
+            }
+            const data = await response.json();
+            return data.choices?.[0]?.message?.content?.trim() || localSiteAnswers[currentLang].umumiy;
+        }
+
+        function appendMsg(text, sender) {
+            const box = document.getElementById('botMessages');
+            const div = document.createElement('div');
+            div.className = 'msg ' + sender;
+            div.innerText = text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        async function sendBotMessage() {
+            const input = document.getElementById('botInput');
+            const val = input.value.trim();
+            if (!val) return;
+            appendMsg(val, 'user');
+            input.value = '';
+
+            if (OPENAI_API_KEY && OPENAI_API_KEY.trim().length > 10) {
+                appendMsg("...", 'bot');
+                const box = document.getElementById('botMessages');
+                const loadingMsg = box.lastElementChild;
+                try {
+                    const gptReply = await askChatGPT(val);
+                    loadingMsg.innerText = gptReply;
+                } catch (e) {
+                    loadingMsg.innerText = findLocalSiteAnswer(val) || localSiteAnswers[currentLang].umumiy;
+                }
+                box.scrollTop = box.scrollHeight;
+            } else {
+                setTimeout(() => {
+                    appendMsg(findLocalSiteAnswer(val) || localSiteAnswers[currentLang].umumiy, 'bot');
+                }, 300);
+            }
+        }
+
+        function askQuick(key) {
+            const labels = {
+                qabul: currentLang === 'ru' ? 'Приём документов' : currentLang === 'en' ? 'Admission' : 'Qabul hujjatlari',
+                yonalish: currentLang === 'ru' ? 'Направления' : currentLang === 'en' ? 'Programs' : "Yo'nalishlar",
+                rahbariyat: currentLang === 'ru' ? 'Руководство' : currentLang === 'en' ? 'Leadership' : 'Rahbariyat',
+                manzil: currentLang === 'ru' ? 'Адрес и карта' : currentLang === 'en' ? 'Location & map' : 'Manzil va xarita'
+            };
+            appendMsg(labels[key], 'user');
+            setTimeout(() => {
+                appendMsg(localSiteAnswers[currentLang][key], 'bot');
+            }, 250);
+        }
+
+        const translations = {
+            uz: {
+                top_loc: "Toshkent viloyati, Oqqo'rg'on tumani",
+                site_title: "Oqqo'rg'on tuman 2-son texnikumi",
+                site_sub: "Professional ta'lim muassasasi",
+                nav_home: "Bosh sahifa",
+                nav_about: "Texnikum haqida",
+                nav_leadership: "Rahbariyat",
+                nav_majors: "Yo'nalishlar",
+                nav_admission: "Qabul 2026",
+                nav_news: "Yangiliklar",
+                nav_contact: "Aloqa",
+                map_section_title: "Texnikum joylashuvi (Xarita)",
+                open_map_btn: "Xaritada ochish",
+                hero_title: "Kelajak kasblarini biz bilan o'rganing!",
+                hero_desc: "Oqqo'rg'on tuman 2-son texnikumi — zamonaviy bilimlar, amaliy ko'nikmalar va kafolatlangan kasb egasi bo'lish maskani.",
+                hero_btn: "Yo'nalishlarni ko'rish",
+                feat1_t: "Malakali ustozlar",
+                feat1_d: "Ko'p yillik tajribaga ega o'qituvchilar va ishlab chiqarish ta'limi ustalari.",
+                feat2_t: "Zamonaviy ustaxonalar",
+                feat2_d: "Amaliy mashg'ulotlar uchun barcha sharoitlarga ega o'quv xonalari va laboratoriyalar.",
+                feat3_t: "Davlat namunasi diplomi",
+                feat3_d: "Bitiruvchilarga o'rta maxsus professional ta'lim to'g'risida davlat diplomi beriladi.",
+                next_about: "Keyingi bo'lim: Texnikum haqida",
+                about_title: "Texnikum haqida ma'lumot",
+                about_text: "Oqqo'rg'on tuman 2-son texnikumi O'zbekiston Respublikasi Oliy ta'lim, fan va innovatsiyalar vazirligi tizimidagi professional ta'lim muassasasi hisoblanadi. Texnikumda o'quvchilar nazariy bilimlarni bevosita amaliyot bilan uyg'unlashtirgan holda o'rganadilar.",
+                dir_role: "Texnikum direktori",
+                dir_name: "[DIREKTOR F.I.SH. NI KIRITING]",
+                rec_days: "Qabul kunlari:",
+                stat_students: "O'quvchilar soni",
+                stat_s_desc: "Hozirda tahsil olayotgan yoshlar",
+                stat_teachers: "Pedagoglar tarkibi",
+                stat_t_desc: "Oliy va birinchi toifali mutaxassislar",
+                next_leadership: "Keyingi bo'lim: Rahbariyat",
+                lead_title: "Texnikum rahbariyati",
+                lead_hint: "Shu bloklardagi [ ... ] ichiga ism va ma'lumotlarni yozing",
+                lead_dir_badge: "DIREKTOR",
+                lead_dir_name: "[DIREKTOR F.I.SH. NI YOZING]",
+                lead_dep1_badge: "O'QUV ISHLARI BO'YICHA O'RINBOSAR",
+                lead_dep1_name: "[1-ZAMDIREKTOR F.I.SH. NI YOZING]",
+                lead_dep2_badge: "YOSHLAR ISHLARI BO'YICHA O'RINBOSAR",
+                lead_dep2_name: "[2-ZAMDIREKTOR F.I.SH. NI YOZING]",
+                lead_dep3_badge: "DIREKTOR O'RINBOSARI",
+                lbl_phone: "Tel:",
+                lbl_days: "Qabul vaqti:",
+                lbl_email: "Email / Tg:",
+                next_majors: "Keyingi bo'lim: Yo'nalishlar",
+                majors_title: "Ta'lim yo'nalishlari (Kasblar)",
+                m1_t: "Kompyuter injiniringi",
+                m1_d: "Dasturlash asoslari, ofis dasturlari va kompyuter tarmoqlariga texnik xizmat ko'rsatish. O'qish muddati: 2 yil.",
+                m2_t: "Buxgalteriya hisobi va audit",
+                m2_d: "Korxona moliyasi, 1C dasturi va soliq hisobotlarini yuritish mutaxassisi. O'qish muddati: 2 yil.",
+                m3_t: "Avtomobillarga xizmat ko'rsatish",
+                m3_d: "Avtomobillarni ta'mirlash, diagnostika qilish va texnik xizmat ko'rsatish ustasi. O'qish muddati: 2 yil.",
+                m4_t: "Tikuvchilik va dizayn",
+                m4_d: "Zamonaviy kiyimlarni modellashtirish, bichish va tikish texnologiyasi. O'qish muddati: 2 yil.",
+                m5_t: "Elektr montaj ishlari",
+                m5_d: "Sanoat va maishiy elektr tarmoqlarini o'rnatish hamda ta'mirlash mutaxassisi. O'qish muddati: 2 yil.",
+                nav_dual: "Dual ta'lim",
+                dual_title: "Dual ta'limdagi maktabgacha ta'lim yo'nalishlari",
+                dual_intro: "Dual ta'limda o'quvchilar nazariy bilimlarni texnikumda oladi, amaliy ko'nikmalarni esa to'g'ridan-to'g'ri maktabgacha ta'lim tashkilotlarida o'rganadi.",
+                dual_badge: "DUAL TA'LIM",
+                lbl_term: "O'qish muddati:",
+                lbl_place: "Amaliyot joyi:",
+                next_dual: "Keyingi bo'lim: Dual ta'lim",
+                next_admission: "Keyingi bo'lim: Qabul 2026",
+                adm_title: "Qabul jarayoni va kerakli hujjatlar",
+                adm_sub: "Texnikumga 11-sinf bitiruvchilari kunduzgi va sirtqi ta'lim shakllariga qabul qilinadi:",
+                doc1: "Direktor nomiga ariza",
+                doc2: "Pasport yoki ID-karta nusxasi",
+                doc3: "Umumiy o'rta ta'lim (11-sinf) attestati yoki diplom asl nusxasi",
+                doc4: "3x4 sm o'lchamdagi 6 dona rangli fotosurat",
+                doc5: "086-U shakldagi tibbiy ma'lumotnoma",
+                next_news: "Keyingi bo'lim: Yangiliklar",
+                news_title: "Texnikum yangiliklari va tadbirlar",
+                n1_t: "\"Kasbim — faxrim\" ko'rik-tanlovi",
+                n1_d: "Texnikum o'quvchilari o'rtasida amaliy ko'nikmalar bo'yicha musobaqa bo'lib o'tdi va g'oliblar taqdirlandi.",
+                n2_t: "Ochiq eshiklar kuni",
+                n2_d: "Tuman maktablarining bitiruvchi sinf o'quvchilari texnikum sharoitlari bilan yaqindan tanishdilar.",
+                n3_t: "Dual ta'lim amaliyoti",
+                n3_d: "O'quvchilarimiz tumandagi yirik korxonalarda ishlab chiqarish amaliyotini boshladilar.",
+                next_contact: "Keyingi bo'lim: Aloqa",
+                cont_title: "Biz bilan bog'lanish",
+                cont_addr_t: "Manzilimiz",
+                cont_addr_d: "Toshkent viloyati, Oqqo'rg'on tumani (Ko'cha va uy raqamini yozing)",
+                cont_phone_t: "Telefon raqamlar",
+                cont_work_t: "Ish tartibi",
+                cont_work_d: "Dushanba – Shanba: 08:30 dan 17:00 gacha\nYakshanba: Dam olish kuni",
+                next_home: "Bosh sahifaga qaytish",
+                bot_btn: "Avto-Bot",
+                bot_title: "ChatGPT + Sayt Yordamchi Bot",
+                bot_status: "24/7 Avto-javob rejimi faol",
+                bot_welcome: "Assalomu alaykum! Men Oqqo'rg'on tuman 2-son texnikumi sayti bo'yicha 24/7 yordamchi botman. Sayt bo'limlari, yo'nalishlar, qabul, rahbariyat yoki boshqa savol bering!",
+                q_adm: "Qabul",
+                q_maj: "Yo'nalishlar",
+                q_lead: "Rahbariyat",
+                q_loc: "Manzil",
+                admin_btn: "Admin (Telegram)",
+                footer_sub: "Ijtimoiy tarmoqlardagi rasmiy sahifalarimiz:",
+                created_by: "Sayt yaratuvchisi:"
+            },
+            ru: {
+                top_loc: "Ташкентская область, Аккурганский район",
+                site_title: "Аккурганский районный техникум №2",
+                site_sub: "Профессиональное образовательное учреждение",
+                nav_home: "Главная",
+                nav_about: "О техникуме",
+                nav_leadership: "Руководство",
+                nav_majors: "Направления",
+                nav_admission: "Приём 2026",
+                nav_news: "Новости",
+                nav_contact: "Контакты",
+                map_section_title: "Местоположение техникума (Карта)",
+                open_map_btn: "Открыть на карте",
+                hero_title: "Освойте профессии будущего вместе с нами!",
+                hero_desc: "Аккурганский районный техникум №2 — место современных знаний, практических навыков и гарантированной профессии.",
+                hero_btn: "Посмотреть направления",
+                feat1_t: "Квалифицированные педагоги",
+                feat1_d: "Преподаватели и мастера производственного обучения с многолетним опытом.",
+                feat2_t: "Современные мастерские",
+                feat2_d: "Учебные кабинеты и лаборатории, оснащенные всем необходимым для практики.",
+                feat3_t: "Диплом государственного образца",
+                feat3_d: "Выпускникам выдается государственный диплом о среднем специальном образовании.",
+                next_about: "Следующий раздел: О техникуме",
+                about_title: "Информация о техникуме",
+                about_text: "Аккурганский районный техникум №2 является профессиональным образовательным учреждением в системе Министерства высшего образования, науки и инноваций Республики Узбекистан.",
+                dir_role: "Директор техникума",
+                dir_name: "[ВВЕДИТЕ Ф.И.О. ДИРЕКТОРА]",
+                rec_days: "Дни приёма:",
+                stat_students: "Количество учащихся",
+                stat_s_desc: "Обучающаяся молодежь",
+                stat_teachers: "Педагогический состав",
+                stat_t_desc: "Специалисты высшей и первой категории",
+                next_leadership: "Следующий раздел: Руководство",
+                lead_title: "Руководство техникума",
+                lead_hint: "Впишите данные в поля [ ... ] в этих карточках",
+                lead_dir_badge: "ДИРЕКТОР",
+                lead_dir_name: "[ВВЕДИТЕ Ф.И.О. ДИРЕКТОРА]",
+                lead_dep1_badge: "ЗАМЕСТИТЕЛЬ ПО УЧЕБНОЙ РАБОТЕ",
+                lead_dep1_name: "[ВВЕДИТЕ Ф.И.О. 1-ГО ЗАМДИРЕКТОРА]",
+                lead_dep2_badge: "ЗАМЕСТИТЕЛЬ ПО РАБОТЕ С МОЛОДЁЖЬЮ",
+                lead_dep2_name: "[ВВЕДИТЕ Ф.И.О. 2-ГО ЗАМДИРЕКТОРА]",
+                lead_dep3_badge: "ЗАМЕСТИТЕЛЬ ДИРЕКТОРА",
+                lbl_phone: "Тел:",
+                lbl_days: "Приём:",
+                lbl_email: "Email / Tg:",
+                next_majors: "Следующий раздел: Направления",
+                majors_title: "Направления обучения (Профессии)",
+                m1_t: "Компьютерный инжиниринг",
+                m1_d: "Основы программирования, офисные программы и обслуживание компьютерных сетей. Срок обучения: 2 года.",
+                m2_t: "Бухгалтерский учёт и аудит",
+                m2_d: "Финансы предприятий, программа 1С и налоговая отчётность. Срок обучения: 2 года.",
+                m3_t: "Обслуживание автомобилей",
+                m3_d: "Мастер по ремонту, диагностике и техническому обслуживанию автомобилей. Срок обучения: 2 года.",
+                m4_t: "Швейное дело и дизайн",
+                m4_d: "Моделирование, кройка и технология пошива современной одежды. Срок обучения: 2 года.",
+                m5_t: "Электромонтажные работы",
+                m5_d: "Специалист по установке и ремонту промышленных и бытовых электросетей. Срок обучения: 2 года.",
+                nav_dual: "Дуальное обучение",
+                dual_title: "Направления дошкольного образования в системе дуального обучения",
+                dual_intro: "В дуальном обучении учащиеся получают теоретические знания в техникуме, а практические навыки осваивают непосредственно в дошкольных образовательных организациях.",
+                dual_badge: "ДУАЛЬНОЕ ОБУЧЕНИЕ",
+                lbl_term: "Срок обучения:",
+                lbl_place: "Место практики:",
+                next_dual: "Следующий раздел: Дуальное обучение",
+                next_admission: "Следующий раздел: Приём 2026",
+                adm_title: "Процесс приёма и необходимые документы",
+                adm_sub: "В техникум принимаются выпускники 11-х классов на очную и заочную формы обучения:",
+                doc1: "Заявление на имя директора",
+                doc2: "Копия паспорта или ID-карты",
+                doc3: "Оригинал аттестата (11 класс) или диплома",
+                doc4: "6 цветных фотографий размером 3х4 см",
+                doc5: "Медицинская справка формы 086-У",
+                next_news: "Следующий раздел: Новости",
+                news_title: "Новости и мероприятия техникума",
+                n1_t: "Конкурс «Моя профессия — моя гордость»",
+                n1_d: "Среди учащихся техникума прошли соревнования по практическим навыкам и награждение победителей.",
+                n2_t: "День открытых дверей",
+                n2_d: "Выпускники школ района ознакомились с условиями обучения в нашем техникуме.",
+                n3_t: "Дуальное образование",
+                n3_d: "Наши учащиеся начали производственную практику на крупных предприятиях района.",
+                next_contact: "Следующий раздел: Контакты",
+                cont_title: "Связаться с нами",
+                cont_addr_t: "Наш адрес",
+                cont_addr_d: "Ташкентская область, Аккурганский район (Укажите улицу и дом)",
+                cont_phone_t: "Телефоны",
+                cont_work_t: "Режим работы",
+                cont_work_d: "Понедельник – Суббота: с 08:30 до 17:00\nВоскресенье: Выходной",
+                next_home: "Вернуться на главную",
+                bot_btn: "Авто-Бот",
+                bot_title: "ChatGPT + Помощник Сайта",
+                bot_status: "Автоответчик 24/7 активен",
+                bot_welcome: "Здравствуйте! Я помощник 24/7 по сайту Аккурганского районного техникума №2. Задайте вопрос о разделах сайта, направлениях, приёме или руководстве!",
+                q_adm: "Приём",
+                q_maj: "Направления",
+                q_lead: "Руководство",
+                q_loc: "Адрес",
+                admin_btn: "Админ (Telegram)",
+                footer_sub: "Наши официальные страницы в социальных сетях:",
+                created_by: "Разработчик сайта:"
+            },
+            en: {
+                top_loc: "Tashkent region, Akkurgan district",
+                site_title: "Akkurgan District Technical School No. 2",
+                site_sub: "Vocational Educational Institution",
+                nav_home: "Home",
+                nav_about: "About Us",
+                nav_leadership: "Leadership",
+                nav_majors: "Programs",
+                nav_admission: "Admission 2026",
+                nav_news: "News",
+                nav_contact: "Contact",
+                map_section_title: "Technical School Location (Map)",
+                open_map_btn: "Open in Map",
+                hero_title: "Learn the professions of the future with us!",
+                hero_desc: "Akkurgan District Technical School No. 2 — a place for modern knowledge, practical skills, and a guaranteed career.",
+                hero_btn: "Explore Programs",
+                feat1_t: "Qualified Teachers",
+                feat1_d: "Experienced educators and vocational training masters with years of expertise.",
+                feat2_t: "Modern Workshops",
+                feat2_d: "Classrooms and laboratories fully equipped for hands-on practical training.",
+                feat3_t: "State Diploma",
+                feat3_d: "Graduates receive a state-recognized diploma in secondary specialized vocational education.",
+                next_about: "Next Section: About Us",
+                about_title: "About the Technical School",
+                about_text: "Akkurgan District Technical School No. 2 is a vocational educational institution under the Ministry of Higher Education, Science and Innovation of the Republic of Uzbekistan.",
+                dir_role: "Director of Technical School",
+                dir_name: "[ENTER DIRECTOR FULL NAME]",
+                rec_days: "Reception days:",
+                stat_students: "Students",
+                stat_s_desc: "Currently enrolled youth",
+                stat_teachers: "Teaching Staff",
+                stat_t_desc: "High-category specialists",
+                next_leadership: "Next Section: Leadership",
+                lead_title: "Technical School Leadership",
+                lead_hint: "Fill in details inside [ ... ] in these cards",
+                lead_dir_badge: "DIRECTOR",
+                lead_dir_name: "[ENTER DIRECTOR FULL NAME]",
+                lead_dep1_badge: "DEPUTY DIRECTOR FOR ACADEMIC AFFAIRS",
+                lead_dep1_name: "[ENTER 1ST DEPUTY FULL NAME]",
+                lead_dep2_badge: "DEPUTY DIRECTOR FOR YOUTH AFFAIRS",
+                lead_dep2_name: "[ENTER 2ND DEPUTY FULL NAME]",
+                lead_dep3_badge: "DEPUTY DIRECTOR",
+                lbl_phone: "Phone:",
+                lbl_days: "Hours:",
+                lbl_email: "Email / Tg:",
+                next_majors: "Next Section: Programs",
+                majors_title: "Educational Programs (Professions)",
+                m1_t: "Computer Engineering",
+                m1_d: "Programming basics, office software, and computer network maintenance. Duration: 2 years.",
+                m2_t: "Accounting and Audit",
+                m2_d: "Corporate finance, 1C software, and tax reporting specialist. Duration: 2 years.",
+                m3_t: "Automotive Maintenance",
+                m3_d: "Car repair, diagnostics, and technical maintenance master. Duration: 2 years.",
+                m4_t: "Sewing and Fashion Design",
+                m4_d: "Modern clothing modeling, cutting, and sewing technology. Duration: 2 years.",
+                m5_t: "Electrical Installation",
+                m5_d: "Industrial and residential electrical network installation and repair. Duration: 2 years.",
+                nav_dual: "Dual Education",
+                dual_title: "Preschool Education Programs in Dual Education",
+                dual_intro: "In dual education, students gain theoretical knowledge at the technical school and practical skills directly in preschool education organizations.",
+                dual_badge: "DUAL EDUCATION",
+                lbl_term: "Duration:",
+                lbl_place: "Practice site:",
+                next_dual: "Next Section: Dual Education",
+                next_admission: "Next Section: Admission 2026",
+                adm_title: "Admission Process & Required Documents",
+                adm_sub: "11th-grade graduates are admitted to full-time and part-time study programs:",
+                doc1: "Application addressed to the Director",
+                doc2: "Copy of Passport or ID-card",
+                doc3: "Original 11th-grade certificate or diploma",
+                doc4: "6 color photos (3x4 cm)",
+                doc5: "Medical certificate (Form 086-U)",
+                next_news: "Next Section: News",
+                news_title: "News and Events",
+                n1_t: "\"My Profession — My Pride\" Contest",
+                n1_d: "A practical skills competition was held among students and winners were awarded.",
+                n2_t: "Open Doors Day",
+                n2_d: "Graduating students from district schools visited and explored our facilities.",
+                n3_t: "Dual Education Practice",
+                n3_d: "Our students have started industrial internships at major local enterprises.",
+                next_contact: "Next Section: Contact",
+                cont_title: "Contact Us",
+                cont_addr_t: "Our Address",
+                cont_addr_d: "Tashkent region, Akkurgan district (Enter street and building)",
+                cont_phone_t: "Phone Numbers",
+                cont_work_t: "Working Hours",
+                cont_work_d: "Monday – Saturday: 08:30 AM to 05:00 PM\nSunday: Closed",
+                next_home: "Back to Home",
+                bot_btn: "Auto-Bot",
+                bot_title: "ChatGPT + Site Assistant Bot",
+                bot_status: "24/7 Auto-reply active",
+                bot_welcome: "Hello! I am the 24/7 assistant bot for Akkurgan District Technical School No. 2. Ask about site sections, programs, admission, or leadership!",
+                q_adm: "Admission",
+                q_maj: "Programs",
+                q_lead: "Leadership",
+                q_loc: "Location",
+                admin_btn: "Admin (Telegram)",
+                footer_sub: "Our official social media pages:",
+                created_by: "Created by:"
+            }
+        };
+
+        const langLabels = { uz: "O'ZB", ru: "РУС", en: "ENG" };
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const box = document.getElementById('langSwitcher');
+            const open = box.classList.toggle('open');
+            document.getElementById('langCurrent').setAttribute('aria-expanded', open);
+        }
+
+        function closeLangMenu() {
+            const box = document.getElementById('langSwitcher');
+            box.classList.remove('open');
+            document.getElementById('langCurrent').setAttribute('aria-expanded', 'false');
+        }
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#langSwitcher')) closeLangMenu();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLangMenu();
+        });
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('langLabel').textContent = langLabels[lang];
+            document.querySelectorAll('.lang-opt').forEach(opt => {
+                opt.classList.toggle('hidden', opt.getAttribute('data-code') === lang);
+            });
+            closeLangMenu();
+
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                if (el._orig === undefined) el._orig = el.innerHTML;
+                if (lang === 'uz') {
+                    el.innerHTML = el._orig;   // O'zbekcha: sahifadagi asl matn o'zgarmaydi
+                    return;
+                }
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        // Boshlang'ich holat: asl matnlarni eslab qolish va o'zbekcha tugmani ko'rsatish
+        document.querySelectorAll('[data-lang]').forEach(el => { el._orig = el.innerHTML; });
+        setLanguage('uz');
+    </script>
+  
+
+</body>
+</html>
